@@ -113,12 +113,39 @@ int GameBoard::merge(Direction direction) {
             }
             break;
         case Direction::DOWN:
+            for (int col = 0; col < 4; ++col) {
+                for (int row = 0; row < 3; ++row) {
+                    if (board[row][col] != 0 && board[row][col] == board[row + 1][col]) {
+                        board[row][col] *= 2;
+                        moveScore += board[row][col];
+                        board[row + 1][col] = 0;
+                    }
+                }
+            }
             // TODO
             break;
         case Direction::LEFT:
+            for (int row = 0; row < 4; ++row) {
+                for (int col = 0; col < 3; ++col) {
+                    if (board[row][col] != 0 && board[row][col] == board[row][col + 1]) {
+                        board[row][col] *= 2;
+                        moveScore += board[row][col];
+                        board[row][col + 1] = 0;
+                    }
+                }
+            }
             // TODO
             break;
         case Direction::RIGHT:
+            for (int row = 0; row < 4; ++row) {
+                for (int col = 3; col > 0; --col) {
+                    if (board[row][col] != 0 && board[row][col] == board[row][col - 1]) {
+                        board[row][col] *= 2;
+                        moveScore += board[row][col];
+                        board[row][col - 1] = 0;
+                    }
+                }
+            }
             // TODO
             break;
     }
