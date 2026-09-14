@@ -57,12 +57,42 @@ void GameBoard::slide(Direction direction) {
             }
             break;
         case Direction::DOWN:
+            for (int col = 0; col < 4; ++col) {
+                int target = 0;     
+                for (int row = 0; row < 4; ++row) {
+                    if (board[row][col] != 0) {
+                        std::swap(board[target][col], board[row][col]);
+                        if (target != row) board[row][col] = 0;
+                        ++target;
+                    }
+                }
+            }
             // TODO
             break;
         case Direction::LEFT:
+            for (int row = 0; row < 4; ++row) {
+                int target = 0;
+                for (int col = 0; col < 4; ++col) {
+                    if (board[row][col] != 0) {
+                        std::swap(board[row][target], board[row][col]);
+                        if (target != row) board[row][col] = 0;
+                        ++target;
+                    }
+                }
+            }
             // TODO
             break;
         case Direction::RIGHT:
+            for (int row = 0; row < 4; ++row) {
+                int target = 3;
+                for (int col = 3; col >= 0; --col) {
+                    if (board[row][col] != 0) {
+                        std::swap(board[row][target], board[row][col]);
+                        if (target != row) board[row][col] = 0;
+                        --target;
+                    }
+                }
+            }
             // TODO
             break;
     }
